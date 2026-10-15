@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Computing (BTCOC702) - MCQ Quiz & Descriptive Portal</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #0f172a;
+      --accent: #f59e0b;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      border-bottom: 4px solid var(--accent);
+    }
+
+    .college-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.4rem;
+    }
+
+    header p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    /* Navigation Tabs */
+    .nav-container {
+      max-width: 1100px;
+      margin: -1.5rem auto 1.5rem;
+      padding: 0 1rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      background: var(--card);
+      color: var(--secondary);
+      border: 2px solid var(--border);
+      padding: 0.85rem 1.5rem;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
+
+    /* Score & Filter Bar */
+    .quiz-controls {
+      background: var(--card);
+      padding: 1rem 1.5rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      position: sticky;
+      top: 10px;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.45rem 0.9rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      background: #f1f5f9;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .filter-btn.active {
+      background: var(--secondary);
+      color: white;
+      border-color: var(--secondary);
+    }
+
+    .score-board {
+      font-weight: 700;
+      background: #eff6ff;
+      color: var(--primary-dark);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #bfdbfe;
+    }
+
+    .reset-btn {
+      background: #fee2e2;
+      color: var(--danger);
+      border: 1px solid #fecaca;
+      padding: 0.5rem 0.9rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Question Card */
+    .q-card {
+      background: var(--card);
+      border-radius: 0.85rem;
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .co-tag {
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 0.25rem 0.65rem;
+      border-radius: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .bl-tag {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .q-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 680px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .opt-btn {
+      text-align: left;
+      padding: 0.85rem 1rem;
+      border-radius: 0.6rem;
+      border: 2px solid var(--border);
+      background: #ffffff;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.15s ease;
+      font-weight: 500;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #f8fafc;
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7;
+      border-color: var(--success);
+      color: #14532d;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2;
+      border-color: var(--danger);
+      color: #7f1d1d;
+    }
+
+    .explanation-box {
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      border-radius: 0.65rem;
+      background: #fffbeb;
+      border-left: 4px solid var(--accent);
+      display: none;
+      font-size: 0.95rem;
+    }
+
+    .explanation-box.show {
+      display: block;
+    }
+
+    /* Descriptive Section Styles */
+    .desc-card {
+      background: var(--card);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    }
+
+    .desc-card.highlight-q4 {
+      border: 2px solid var(--primary);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+    }
+
+    .desc-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.3rem 0.7rem;
+      border-radius: 0.4rem;
+      margin: 1rem 0 0.6rem;
+    }
+
+    .label-eng {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .label-diag {
+      background: #f3e8ff;
+      color: #6b21a8;
+    }
+
+    .label-hinglish {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .diagram-box {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin: 0.75rem 0;
+      text-align: center;
+      overflow-x: auto;
+    }
+
+    .hinglish-box {
+      background: linear-gradient(to right, #fffbeb, #fef3c7);
+      border-left: 5px solid var(--accent);
+      padding: 1.25rem;
+      border-radius: 0.6rem;
+      margin-top: 0.5rem;
+      color: #451a03;
+    }
+
+    .desc-content ul {
+      margin-left: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .desc-content li {
+      margin-bottom: 0.4rem;
+    }
+
+    table.comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+
+    table.comp-table th, table.comp-table td {
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    table.comp-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="college-badge">SSVPS Bapusaheb Shivajirao Deore College of Engineering, Dhule</div>
+    <h1>Cloud Computing (BTCOC702) - Interactive Study Portal</h1>
+    <p>B.Tech (Final Year) Computer Engineering | Question Bank Solutions with Hinglish Explanations</p>
+  </header>
+
+  <div class="nav-container">
+    <button class="tab-btn active" onclick="switchMainTab('mcq')">📝 Interactive MCQ Quiz (30 Qs)</button>
+    <button class="tab-btn" onclick="switchMainTab('desc')">📘 Q4 Descriptive Answers + Diagrams (Hinglish)</button>
+  </div>
+
+  <div class="container">
+    <!-- TAB 1: MCQ QUIZ SECTION -->
+    <div id="mcq-section">
+      <div class="quiz-controls">
+        <div class="filter-group">
+          <button class="filter-btn active" onclick="filterMCQs('ALL', this)">All (30)</button>
+          <button class="filter-btn" onclick="filterMCQs('CO-01', this)">CO-01 (10)</button>
+          <button class="filter-btn" onclick="filterMCQs('CO-02', this)">CO-02 (10)</button>
+          <button class="filter-btn" onclick="filterMCQs('CO-03', this)">CO-03 (10)</button>
+        </div>
+        <div style="display:flex; gap:0.75rem; align-items:center;">
+          <div class="score-board">Score: <span id="score-val">0</span> / <span id="attempted-val">0</span></div>
+          <button class="reset-btn" onclick="resetQuiz()">🔄 Reset Quiz</button>
+        </div>
+      </div>
+
+      <div id="questions-container"></div>
+    </div>
+
+    <!-- TAB 2: DESCRIPTIVE QUESTIONS (SECTION 4) -->
+    <div id="desc-section" class="hidden">
+
+      <!-- Quick Jump Buttons for Descriptive Questions -->
+      <div class="quiz-controls" style="position:static;">
+        <div style="font-weight:700; color:var(--secondary);">Descriptive Questions on CO-03 (6 Marks Each):</div>
+        <div class="filter-group">
+          <a href="#desc-q4" class="filter-btn active" style="text-decoration:none;">⭐ Jump to Q.4 (Capacity Planning)</a>
+          <a href="#desc-q1" class="filter-btn" style="text-decoration:none;">Q.1 Scaling</a>
+          <a href="#desc-q2" class="filter-btn" style="text-decoration:none;">Q.2 Auto-Scaling</a>
+          <a href="#desc-q3" class="filter-btn" style="text-decoration:none;">Q.3 Poor Planning</a>
+          <a href="#desc-q5" class="filter-btn" style="text-decoration:none;">Q.5 DBaaS</a>
+        </div>
+      </div>
+
+      <!-- DESCRIPTIVE Q.4 (HIGHLIGHTED AT TOP AS REQUESTED, FOLLOWED BY ALL OTHERS IN ORDER) -->
+      <div id="desc-q4" class="desc-card highlight-q4 desc-content">
+        <div class="q-header">
+          <span class="co-tag" style="background:#dbeafe; color:#1e40af;">⭐ Q.4 Descriptive (CO-03) - 6 Marks</span>
+          <span class="bl-tag">Bloom's Level: BL-1</span>
+        </div>
+        <div class="desc-title">
+          Q.4) Define Capacity Planning in the context of cloud computing. What parameters are typically evaluated during this process?
+        </div>
+
+        <span class="section-label label-eng">1. Exam-Ready Detailed Answer (English)</span>
+        <p><strong>Definition of Capacity Planning in Cloud Computing:</strong></p>
+        <p>
+          In cloud computing, <strong>Capacity Planning</strong> is the systematic process of predicting, determining, and provisioning the optimal amount of computing resources (such as CPU, memory, storage, and network bandwidth) required to meet current and future application workload demands while maintaining Service Level Agreements (SLAs) and minimizing operational costs.
+        </p>
+        <p style="margin-top:0.5rem;">
+          The primary goal of cloud capacity planning is to eliminate two major risks:
+        </p>
+        <ul>
+          <li><strong>Under-provisioning:</strong> Having fewer resources than required, leading to slow response times, server crashes, and downtime during traffic spikes.</li>
+          <li><strong>Over-provisioning:</strong> Allocating excessive resources that remain idle, resulting in unnecessary financial expenditure (high cloud bills).</li>
+        </ul>
+
+        <span class="section-label label-diag">2. Architectural Diagram: Capacity Planning Process & Evaluated Parameters</span>
+        <div class="diagram-box">
+          <svg width="820" height="320" viewBox="0 0 820 320" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background Boxes -->
+            <rect x="15" y="20" width="230" height="280" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+            <text x="130" y="48" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e3a8a">INPUT PARAMETERS</text>
+
+            <!-- Parameter Items -->
+            <rect x="35" y="65" width="190" height="34" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+            <text x="130" y="87" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e293b">1. CPU Utilization (%)</text>
+
+            <rect x="35" y="108" width="190" height="34" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+            <text x="130" y="130" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e293b">2. Memory (RAM) Usage</text>
+
+            <rect x="35" y="151" width="190" height="34" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+            <text x="130" y="173" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e293b">3. Storage Capacity & IOPS</text>
+
+            <rect x="35" y="194" width="190" height="34" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+            <text x="130" y="216" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e293b">4. Network Bandwidth/Latency</text>
+
+            <rect x="35" y="237" width="190" height="34" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+            <text x="130" y="259" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e293b">5. Workload & Cost/SLA Limits</text>
+
+            <!-- Arrow 1 -->
+            <line x1="245" y1="160" x2="305" y2="160" stroke="#2563eb" stroke-width="3"/>
+            <polygon points="305,154 318,160 305,166" fill="#2563eb"/>
+
+            <!-- Center Engine -->
+            <rect x="320" y="65" width="210" height="190" rx="14" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
+            <text x="425" y="95" font-size="14" font-weight="bold" text-anchor="middle" fill="#92400e">CAPACITY PLANNING</text>
+            <text x="425" y="113" font-size="14" font-weight="bold" text-anchor="middle" fill="#92400e">ENGINE</text>
+            <line x1="345" y1="125" x2="505" y2="125" stroke="#fbbf24" stroke-width="1.5"/>
+            <text x="425" y="152" font-size="12" text-anchor="middle" fill="#78350f">• Measure Baseline Load</text>
+            <text x="425" y="177" font-size="12" text-anchor="middle" fill="#78350f">• Forecast Peak Demand</text>
+            <text x="425" y="202" font-size="12" text-anchor="middle" fill="#78350f">• Stress & Load Testing</text>
+            <text x="425" y="227" font-size="12" text-anchor="middle" fill="#78350f">• Auto-Scaling Rules</text>
+
+            <!-- Arrow 2 -->
+            <line x1="530" y1="160" x2="590" y2="160" stroke="#16a34a" stroke-width="3"/>
+            <polygon points="590,154 603,160 590,166" fill="#16a34a"/>
+
+            <!-- Output Box -->
+            <rect x="605" y="55" width="200" height="210" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+            <text x="705" y="85" font-size="14" font-weight="bold" text-anchor="middle" fill="#14532d">OPTIMAL CLOUD</text>
+            <text x="705" y="103" font-size="14" font-weight="bold" text-anchor="middle" fill="#14532d">INFRASTRUCTURE</text>
+            <rect x="625" y="120" width="160" height="35" rx="6" fill="#ffffff" stroke="#86efac"/>
+            <text x="705" y="142" font-size="12" font-weight="bold" text-anchor="middle" fill="#166534">High Availability (SLA)</text>
+            <rect x="625" y="165" width="160" height="35" rx="6" fill="#ffffff" stroke="#86efac"/>
+            <text x="705" y="187" font-size="12" font-weight="bold" text-anchor="middle" fill="#166534">Zero Resource Waste</text>
+            <rect x="625" y="210" width="160" height="35" rx="6" fill="#ffffff" stroke="#86efac"/>
+            <text x="705" y="232" font-size="12" font-weight="bold" text-anchor="middle" fill="#166534">Optimized Cloud Cost</text>
+          </svg>
+        </div>
+
+        <p><strong>Key Parameters Evaluated During Cloud Capacity Planning:</strong></p>
+        <ol style="margin-left:1.5rem; margin-bottom:1rem;">
+          <li><strong>CPU Utilization (Compute Power):</strong> Evaluates clock speed, number of vCPUs, and average vs. peak CPU usage percentage (typically keeping threshold around 70%–80%).</li>
+          <li><strong>Memory (RAM) Consumption:</strong> Tracks active memory usage, page faults, Swap usage, and memory leaks for in-memory caches and databases.</li>
+          <li><strong>Storage Capacity and IOPS:</strong> Measures total data growth rate (GB/TB), Read/Write throughput, and Input/Output Operations Per Second (IOPS) for disk latency.</li>
+          <li><strong>Network Bandwidth and Latency:</strong> Evaluates incoming/outgoing traffic (Mbps/Gbps), packet loss, and Round-Trip Time (RTT) between users and data centers.</li>
+          <li><strong>Application Workload & Concurrency:</strong> Analyzes concurrent active users, requests per second (RPS), and seasonal traffic spikes (e.g., festival sales or exam results).</li>
+          <li><strong>Service Level Agreements (SLAs) & Budget Constraints:</strong> Evaluates required uptime (e.g., 99.99% availability), Recovery Time Objective (RTO), and financial budget limits.</li>
+        </ol>
+
+        <span class="section-label label-hinglish">3. Hinglish Explanation (Samajhne ke liye Easy Breakdown)</span>
+        <div class="hinglish-box">
+          <p><strong>Himesh Bhai, चलो Q.4 (Capacity Planning) ko ekdum easy Hinglish mein samajhte hain:</strong></p>
+          <p style="margin-top:0.5rem;">
+            <strong>Capacity Planning kya hota hai?</strong><br/>
+            Maan lo aap ek bada wedding function ya college event organize kar rahe ho. Agar aap pehle se andaza (estimate) lagate ho ki kitne guests aayenge, kitna khana banana hai aur kitni chairs lagani hain — taaki na khana kam pade (<strong>Under-provisioning</strong>) aur na hi khana waste ho (<strong>Over-provisioning</strong>) — bilkul isi cheez ko Cloud Computing mein <strong>Capacity Planning</strong> kehte hain!
+          </p>
+          <p style="margin-top:0.5rem;">
+            <strong>Is process mein kaunse 6 Parameters check kiye jaate hain?</strong>
+          </p>
+          <ul style="margin-top:0.35rem;">
+            <li><strong>1. CPU Utilization:</strong> Humara server kitna dimaag (processor) use kar raha hai? Normal time pe aur peak traffic pe kitne vCPU lagenge.</li>
+            <li><strong>2. Memory (RAM):</strong> App ya database ko fast chalane ke liye kitni RAM chahiye taaki server hang na ho.</li>
+            <li><strong>3. Storage & IOPS:</strong> Sirf kitne GB/TB space chahiye woh nahi, balki disk kitni speed se data Read/Write (IOPS) kar sakti hai woh bhi check hota hai.</li>
+            <li><strong>4. Network Bandwidth:</strong> Ek saath hazaron users aayenge toh data transfer ki speed (Mbps/Gbps) aur network delay (Latency) kitna hoga.</li>
+            <li><strong>5. Workload Patterns (Traffic Spikes):</strong> Din mein kitne users aate hain aur festival sale ya result ke din achanak kitna गुना (2x/5x) traffic badhta hai.</li>
+            <li><strong>6. Cost & SLA:</strong> Company ka budget kitna hai aur customer ko kitna uptime (jaise 99.99% server online rehna) promise kiya gaya hai.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DESCRIPTIVE Q.1 -->
+      <div id="desc-q1" class="desc-card desc-content">
+        <div class="q-header">
+          <span class="co-tag">Q.1 Descriptive (CO-03) - 6 Marks</span>
+          <span class="bl-tag">Bloom's Level: BL-1</span>
+        </div>
+        <div class="desc-title">
+          Q.1) Describe the importance of Cloud Scaling and differentiate between vertical scaling and horizontal scaling with appropriate examples.
+        </div>
+
+        <span class="section-label label-eng">1. Exam-Ready Detailed Answer (English)</span>
+        <p><strong>Importance of Cloud Scaling:</strong></p>
+        <p>
+          Cloud Scaling is the ability of a cloud system to dynamically increase or decrease its computing resources (CPU, RAM, storage, servers) in response to changing workload demands. It is crucial for:
+        </p>
+        <ul>
+          <li><strong>Maintaining Performance:</strong> Prevents application slowdown or crashes during sudden traffic surges.</li>
+          <li><strong>Cost Optimization:</strong> Resources can be scaled down during low-traffic hours, saving money via pay-as-you-go billing.</li>
+          <li><strong>High Availability & Reliability:</strong> Ensures seamless user experience and business continuity.</li>
+        </ul>
+
+        <span class="section-label label-diag">2. Diagram: Vertical Scaling (Scale Up) vs. Horizontal Scaling (Scale Out)</span>
+        <div class="diagram-box">
+          <svg width="780" height="250" viewBox="0 0 780 250" xmlns="http://www.w3.org/2000/svg">
+            <!-- Left: Vertical Scaling -->
+            <rect x="20" y="15" width="350" height="220" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="195" y="42" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e3a8a">VERTICAL SCALING (Scale Up)</text>
+            
+            <rect x="55" y="95" width="95" height="90" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+            <text x="102" y="135" font-size="12" font-weight="bold" text-anchor="middle">1 Server</text>
+            <text x="102" y="155" font-size="11" text-anchor="middle">4 GB RAM</text>
+
+            <line x1="160" y1="140" x2="210" y2="140" stroke="#2563eb" stroke-width="3"/>
+            <polygon points="210,134 222,140 210,146" fill="#2563eb"/>
+
+            <rect x="230" y="65" width="120" height="145" rx="8" fill="#bfdbfe" stroke="#1d4ed8" stroke-width="2.5"/>
+            <text x="290" y="120" font-size="13" font-weight="bold" text-anchor="middle">1 Bigger Server</text>
+            <text x="290" y="142" font-size="11" text-anchor="middle">32 GB RAM</text>
+            <text x="290" y="160" font-size="11" text-anchor="middle">16 vCPUs</text>
+
+            <!-- Right: Horizontal Scaling -->
+            <rect x="410" y="15" width="350" height="220" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="585" y="42" font-size="14" font-weight="bold" text-anchor="middle" fill="#166534">HORIZONTAL SCALING (Scale Out)</text>
+
+            <rect x="435" y="95" width="90" height="90" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+            <text x="480" y="135" font-size="12" font-weight="bold" text-anchor="middle">Instance 1</text>
+            <text x="480" y="155" font-size="11" text-anchor="middle">4 GB RAM</text>
+
+            <line x1="535" y1="140" x2="585" y2="140" stroke="#16a34a" stroke-width="3"/>
+            <polygon points="585,134 597,140 585,146" fill="#16a34a"/>
+
+            <rect x="610" y="55" width="125" height="50" rx="6" fill="#bbf7d0" stroke="#15803d" stroke-width="2"/>
+            <text x="672" y="85" font-size="12" font-weight="bold" text-anchor="middle">Instance 1 (4GB)</text>
+
+            <rect x="610" y="115" width="125" height="50" rx="6" fill="#bbf7d0" stroke="#15803d" stroke-width="2"/>
+            <text x="672" y="145" font-size="12" font-weight="bold" text-anchor="middle">Instance 2 (4GB)</text>
+
+            <rect x="610" y="175" width="125" height="50" rx="6" fill="#bbf7d0" stroke="#15803d" stroke-width="2"/>
+            <text x="672" y="205" font-size="12" font-weight="bold" text-anchor="middle">Instance 3 (4GB)</text>
+          </svg>
+        </div>
+
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Vertical Scaling (Scaling Up)</th>
+              <th>Horizontal Scaling (Scaling Out)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Definition</strong></td>
+              <td>Increasing the capacity (CPU, RAM, Disk) of an existing single server/VM.</td>
+              <td>Adding more server instances/nodes to the existing pool to distribute load.</td>
+            </tr>
+            <tr>
+              <td><strong>Downtime</strong></td>
+              <td>Often requires server reboot/restart (causes brief downtime).</td>
+              <td>Zero downtime; new instances are added seamlessly behind a Load Balancer.</td>
+            </tr>
+            <tr>
+              <td><strong>Fault Tolerance</strong></td>
+              <td>Single Point of Failure (if the single machine fails, the app goes down).</td>
+              <td>High fault tolerance (if one VM fails, other VMs handle the traffic).</td>
+            </tr>
+            <tr>
+              <td><strong>Hardware Limit</strong></td>
+              <td>Limited by the maximum capacity of the physical host machine.</td>
+              <td>Virtually limitless scaling using cloud Auto-Scaling groups.</td>
+            </tr>
+            <tr>
+              <td><strong>Example</strong></td>
+              <td>Upgrading an AWS EC2 instance from <code>t3.medium</code> to <code>t3.2xlarge</code>.</td>
+              <td>Adding 5 more <code>t3.medium</code> EC2 instances behind an Elastic Load Balancer.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <span class="section-label label-hinglish">3. Hinglish Explanation</span>
+        <div class="hinglish-box">
+          <p><strong>Himesh Bhai, Vertical vs Horizontal Scaling ka simple logic:</strong></p>
+          <ul>
+            <li><strong>Vertical Scaling (Scale Up):</strong> Maan lo aapke paas ek delivery boy hai jo cycle chalata hai. Load badhne par aapne usko cycle ki jagah <strong>Bada Truck</strong> de diya. Machine wahi ek hai, bas uski power (RAM/CPU) badha di! Problem kya hai? Agar woh ek truck kharab ho gaya toh kaam ruk jayega.</li>
+            <li><strong>Horizontal Scaling (Scale Out):</strong> Ek bada truck lene ki jagah aapne <strong>10 aur delivery boys</strong> rakh liye! Ab agar ek bimar bhi pad jaye, toh baaki 9 kaam sambhal lenge. Cloud computing mein Horizontal Scaling sabse best maana jaata hai.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DESCRIPTIVE Q.2 -->
+      <div id="desc-q2" class="desc-card desc-content">
+        <div class="q-header">
+          <span class="co-tag">Q.2 Descriptive (CO-03) - 6 Marks</span>
+          <span class="bl-tag">Bloom's Level: BL-3</span>
+        </div>
+        <div class="desc-title">
+          Q.2) Given a scenario where a cloud service is experiencing performance degradation during traffic spikes, explain how auto-scaling policies can be applied to maintain performance and reliability.
+        </div>
+
+        <span class="section-label label-eng">1. Exam-Ready Detailed Answer (English)</span>
+        <p>
+          When a cloud application faces sudden traffic spikes (e.g., flash sales or breaking news), static servers become overloaded, causing high response times and HTTP 5xx errors. <strong>Auto-Scaling</strong> resolves this by automatically adjusting the number of active compute instances based on real-time demand.
+        </p>
+
+        <span class="section-label label-diag">2. Diagram: Auto-Scaling Architecture During Traffic Spikes</span>
+        <div class="diagram-box">
+          <svg width="800" height="230" viewBox="0 0 800 230" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="75" width="130" height="75" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+            <text x="80" y="108" font-size="12" font-weight="bold" text-anchor="middle" fill="#7f1d1d">Traffic Spike!</text>
+            <text x="80" y="128" font-size="11" text-anchor="middle" fill="#7f1d1d">(Users Surge)</text>
+
+            <line x1="145" y1="112" x2="195" y2="112" stroke="#334155" stroke-width="2.5"/>
+            <polygon points="195,106 207,112 195,118" fill="#334155"/>
+
+            <rect x="210" y="75" width="145" height="75" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+            <text x="282" y="108" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e3a8a">Load Balancer</text>
+            <text x="282" y="128" font-size="11" text-anchor="middle" fill="#1e3a8a">(Distributes Traffic)</text>
+
+            <line x1="355" y1="112" x2="405" y2="112" stroke="#334155" stroke-width="2.5"/>
+            <polygon points="405,106 417,112 405,118" fill="#334155"/>
+
+            <rect x="420" y="25" width="175" height="175" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+            <text x="507" y="48" font-size="12" font-weight="bold" text-anchor="middle" fill="#14532d">Auto-Scaling Group</text>
+            <rect x="440" y="60" width="135" height="32" rx="5" fill="#fff" stroke="#16a34a"/>
+            <text x="507" y="81" font-size="11" text-anchor="middle">VM 1 (Active)</text>
+            <rect x="440" y="100" width="135" height="32" rx="5" fill="#fff" stroke="#16a34a"/>
+            <text x="507" y="121" font-size="11" text-anchor="middle">VM 2 (Active)</text>
+            <rect x="440" y="140" width="135" height="38" rx="5" fill="#fef08a" stroke="#ca8a04" stroke-dasharray="4"/>
+            <text x="507" y="164" font-size="11" font-weight="bold" text-anchor="middle">+ VM 3, 4 (Auto-Added)</text>
+
+            <line x1="595" y1="112" x2="635" y2="112" stroke="#f59e0b" stroke-width="2.5"/>
+            <polygon points="635,106 647,112 635,118" fill="#f59e0b"/>
+
+            <rect x="650" y="60" width="135" height="105" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+            <text x="717" y="92" font-size="12" font-weight="bold" text-anchor="middle" fill="#92400e">Cloud Monitor</text>
+            <text x="717" y="112" font-size="11" text-anchor="middle" fill="#78350f">CPU &gt; 75%?</text>
+            <text x="717" y="132" font-size="11" font-weight="bold" text-anchor="middle" fill="#b45309">Trigger Scale-Out!</text>
+          </svg>
+        </div>
+
+        <p><strong>Types of Auto-Scaling Policies to Apply:</strong></p>
+        <ul>
+          <li><strong>1. Target Tracking Scaling Policy:</strong> Maintains a specific metric at a target value (e.g., "Keep average CPU utilization of the Auto-Scaling Group at 70%").</li>
+          <li><strong>2. Step Scaling Policy:</strong> Adds resources in steps based on alarm breach severity (e.g., if CPU &gt; 75%, add 2 VMs; if CPU &gt; 90%, add 5 VMs immediately).</li>
+          <li><strong>3. Scheduled Scaling Policy:</strong> Proactively scales out resources before predictable traffic spikes (e.g., scaling up at 9:50 AM before a 10:00 AM flash sale).</li>
+          <li><strong>4. Cooldown Period & Health Checks:</strong> Cooldown prevents rapid thrashing of VMs, and Load Balancer health checks automatically replace unhealthy/crashed instances.</li>
+        </ul>
+
+        <span class="section-label label-hinglish">3. Hinglish Explanation</span>
+        <div class="hinglish-box">
+          <p><strong>Himesh Bhai, Traffic Spike mein Auto-Scaling kaise bachaata hai:</strong></p>
+          <p>
+            Jab website par achanak hazaron log aa jaate hain, toh <strong>Cloud Monitor (jaise AWS CloudWatch)</strong> dekhta hai ki CPU usage 75% ke upar chala gaya hai. Woh turant <strong>Auto-Scaling Policy</strong> ko signal bhejta hai, jo bina kisi human intervention ke naye Virtual Machines (VM 3, VM 4) launch kar deta hai aur <strong>Load Balancer</strong> saara traffic barabar baant deta hai. Jab raat ko traffic kam hota hai, toh woh extra VMs ko band (Scale-In) kar deta hai taaki paise bachein!
+          </p>
+        </div>
+      </div>
+
+      <!-- DESCRIPTIVE Q.3 -->
+      <div id="desc-q3" class="desc-card desc-content">
+        <div class="q-header">
+          <span class="co-tag">Q.3 Descriptive (CO-03) - 6 Marks</span>
+          <span class="bl-tag">Bloom's Level: BL-5</span>
+        </div>
+        <div class="desc-title">
+          Q.3) Critically analyse the impact of poor capacity planning on enterprise cloud performance. What strategies would you recommend to improve resource utilization?
+        </div>
+
+        <span class="section-label label-eng">1. Exam-Ready Detailed Answer (English)</span>
+        <p><strong>Impact of Poor Capacity Planning on Enterprise Cloud Performance:</strong></p>
+        <ul>
+          <li><strong>Performance Bottlenecks & Downtime (Under-provisioning):</strong> Insufficient CPU/RAM leads to high latency, request timeouts, system crashes, SLA violations, and loss of customer trust.</li>
+          <li><strong>Financial Wastage / Cloud Sprawl (Over-provisioning):</strong> Running oversized or idle instances ("zombie servers") drastically inflates monthly OpEx cloud bills without improving performance.</li>
+          <li><strong>Inability to Handle Peak Loads:</strong> Lack of stress baselines causes cascading failures across microservices during peak business hours.</li>
+        </ul>
+
+        <span class="section-label label-diag">2. Diagram: Over-Provisioning vs. Under-Provisioning vs. Optimal Utilization</span>
+        <div class="diagram-box">
+          <svg width="760" height="220" viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg">
+            <!-- Axes -->
+            <line x1="60" y1="185" x2="720" y2="185" stroke="#334155" stroke-width="2"/>
+            <line x1="60" y1="25" x2="60" y2="185" stroke="#334155" stroke-width="2"/>
+            <text x="390" y="210" font-size="12" font-weight="bold" text-anchor="middle">Time / Workload Demand</text>
+            <text x="25" y="105" font-size="12" font-weight="bold" text-anchor="middle" transform="rotate(-90 25,105)">Resources</text>
+
+            <!-- Over-provisioning line -->
+            <line x1="60" y1="45" x2="700" y2="45" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="6"/>
+            <text x="580" y="38" font-size="12" font-weight="bold" fill="#dc2626">Over-Provisioned (Wasted Money)</text>
+
+            <!-- Under-provisioning line -->
+            <line x1="60" y1="145" x2="700" y2="145" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6"/>
+            <text x="570" y="163" font-size="12" font-weight="bold" fill="#b45309">Under-Provisioned (Server Crash/Lag)</text>
+
+            <!-- Actual Demand & Auto-scaled Curve -->
+            <path d="M 60 130 Q 180 50, 300 110 T 540 55 T 700 100" fill="none" stroke="#16a34a" stroke-width="3.5"/>
+            <text x="330" y="80" font-size="12" font-weight="bold" fill="#15803d">Optimal Elastic Capacity (Follows Demand)</text>
+          </svg>
+        </div>
+
+        <p><strong>Recommended Strategies to Improve Resource Utilization:</strong></p>
+        <ol style="margin-left:1.5rem;">
+          <li><strong>Right-Sizing Instances:</strong> Continuously monitor CPU/RAM metrics and downgrade oversized VMs to match actual usage.</li>
+          <li><strong>Dynamic Auto-Scaling & Serverless Computing:</strong> Use Auto-Scaling Groups and FaaS (e.g., AWS Lambda) so resources run only when requests arrive.</li>
+          <li><strong>Containerization (Docker & Kubernetes):</strong> Pack multiple microservices efficiently onto shared host nodes using Kubernetes pod auto-scaling.</li>
+          <li><strong>Eliminating Idle Resources:</strong> Automate scripts to shut down Dev/Test environments during nights and weekends.</li>
+          <li><strong>Using Spot / Reserved Instances:</strong> Use Reserved Instances for predictable baseline loads and Spot Instances for fault-tolerant batch jobs.</li>
+        </ol>
+
+        <span class="section-label label-hinglish">3. Hinglish Explanation</span>
+        <div class="hinglish-box">
+          <p><strong>Himesh Bhai, Poor Capacity Planning ke 2 bade nuksaan aur unka ilaaj:</strong></p>
+          <ul>
+            <li><strong>Nuksaan 1 (Under-provisioning):</strong> Zaroorat se kam server liye toh website slow ho jayegi ya crash ho jayegi, jisse customers bhaag jayenge.</li>
+            <li><strong>Nuksaan 2 (Over-provisioning):</strong> Dar ke maare zaroorat se bohot bade servers le liye jo 90% time khaali pade rehte hain — isse company ka cloud bill lakho mein aayega!</li>
+            <li><strong>Ilaaj (Strategies):</strong> Sahi size ka server chuno (<strong>Right-sizing</strong>), <strong>Auto-scaling</strong> aur <strong>Docker/Kubernetes</strong> use karo, aur raat ko jab office band ho tab testing servers ko auto-shutdown kar do!</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DESCRIPTIVE Q.5 -->
+      <div id="desc-q5" class="desc-card desc-content">
+        <div class="q-header">
+          <span class="co-tag">Q.5 Descriptive (CO-03) - 6 Marks</span>
+          <span class="bl-tag">Bloom's Level: BL-5</span>
+        </div>
+        <div class="desc-title">
+          Q.5) Assess the effectiveness of Database as a Service in handling large-scale applications for enterprises. What are its advantages and potential risks from a data governance perspective?
+        </div>
+
+        <span class="section-label label-eng">1. Exam-Ready Detailed Answer (English)</span>
+        <p>
+          <strong>Database as a Service (DBaaS)</strong> (e.g., Amazon RDS, Google Cloud Spanner, Azure SQL, MongoDB Atlas) is a managed cloud service model that enables enterprises to deploy, operate, and scale databases without manually managing physical hardware, OS patches, or backup configurations.
+        </p>
+
+        <span class="section-label label-diag">2. Diagram: Enterprise DBaaS Architecture & Governance</span>
+        <div class="diagram-box">
+          <svg width="780" height="220" viewBox="0 0 780 220" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="65" width="150" height="85" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+            <text x="95" y="102" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e3a8a">Enterprise App</text>
+            <text x="95" y="122" font-size="11" text-anchor="middle" fill="#1e3a8a">(High Traffic)</text>
+
+            <line x1="170" y1="107" x2="230" y2="107" stroke="#2563eb" stroke-width="2.5"/>
+            <polygon points="230,101 242,107 230,113" fill="#2563eb"/>
+
+            <rect x="245" y="20" width="290" height="175" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+            <text x="390" y="45" font-size="13" font-weight="bold" text-anchor="middle" fill="#14532d">Managed DBaaS Platform (AWS RDS)</text>
+            <rect x="265" y="60" width="115" height="55" rx="6" fill="#fff" stroke="#16a34a"/>
+            <text x="322" y="85" font-size="11" font-weight="bold" text-anchor="middle">Primary DB</text>
+            <text x="322" y="102" font-size="10" text-anchor="middle">(Read/Write)</text>
+
+            <rect x="400" y="60" width="115" height="55" rx="6" fill="#fff" stroke="#16a34a"/>
+            <text x="457" y="85" font-size="11" font-weight="bold" text-anchor="middle">Read Replicas</text>
+            <text x="457" y="102" font-size="10" text-anchor="middle">(Auto-Scaling)</text>
+
+            <rect x="265" y="128" width="250" height="48" rx="6" fill="#f0fdf4" stroke="#15803d"/>
+            <text x="390" y="150" font-size="11" font-weight="bold" text-anchor="middle">Automated Backups, Patching &amp; Failover</text>
+
+            <line x1="535" y1="107" x2="585" y2="107" stroke="#dc2626" stroke-width="2.5"/>
+            <polygon points="585,101 597,107 585,113" fill="#dc2626"/>
+
+            <rect x="600" y="35" width="160" height="145" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+            <text x="680" y="62" font-size="12" font-weight="bold" text-anchor="middle" fill="#7f1d1d">Data Governance</text>
+            <text x="680" y="88" font-size="11" text-anchor="middle" fill="#991b1b">• Data Residency</text>
+            <text x="680" y="110" font-size="11" text-anchor="middle" fill="#991b1b">• Privacy (GDPR)</text>
+            <text x="680" y="132" font-size="11" text-anchor="middle" fill="#991b1b">• Vendor Lock-in</text>
+            <text x="680" y="154" font-size="11" text-anchor="middle" fill="#991b1b">• Multi-Tenancy Risk</text>
+          </svg>
+        </div>
+
+        <p><strong>Advantages of DBaaS for Large-Scale Applications:</strong></p>
+        <ul>
+          <li><strong>Automated Administration:</strong> Automated OS/DB patching, point-in-time backups, and automated multi-AZ failover.</li>
+          <li><strong>High Scalability:</strong> Supports read-replicas and sharding to handle millions of concurrent queries with low latency.</li>
+          <li><strong>Cost Efficiency & Rapid Deployment:</strong> Eliminates upfront hardware CapEx and provisions production-ready databases in minutes.</li>
+        </ul>
+
+        <p><strong>Potential Risks from a Data Governance Perspective:</strong></p>
+        <ul>
+          <li><strong>Data Sovereignty & Residency Compliance:</strong> Replicating data across global regions may violate local regulations (e.g., RBI data localization, GDPR, HIPAA).</li>
+          <li><strong>Data Privacy & Multi-Tenancy Risks:</strong> Sensitive enterprise data resides on third-party infrastructure, requiring strict encryption at rest and in transit.</li>
+          <li><strong>Vendor Lock-in:</strong> Proprietary cloud databases (e.g., AWS Aurora or DynamoDB) make migrating to another provider complex and costly.</li>
+          <li><strong>Limited Administrative Control:</strong> Enterprises lack root access to the underlying host OS for custom security auditing tools.</li>
+        </ul>
+
+        <span class="section-label label-hinglish">3. Hinglish Explanation</span>
+        <div class="hinglish-box">
+          <p><strong>Himesh Bhai, DBaaS aur Data Governance ka simple breakdown:</strong></p>
+          <ul>
+            <li><strong>DBaaS kya hai?</strong> Database ko khud install, backup aur update karne ki tension lene ki jagah cloud provider (jaise AWS RDS) se ready-made managed database le lena.</li>
+            <li><strong>Fayde (Advantages):</strong> Automatic backup hota hai, server crash hone par <strong>Standby Replica</strong> turant chalu ho jaata hai, aur lakho users ka load aasani se handle hota hai.</li>
+            <li><strong>Data Governance Risks (Khatre):</strong> Sabse bada risk hai <strong>Data Location (Residency)</strong> — jaise RBI ka rule hai ki Indian banking data India ke bahar ke server par nahi jaana chahiye. Dusra risk hai <strong>Vendor Lock-in</strong> (ek cloud se dusre cloud par database shift karna mushkil hota hai) aur <strong>Data Privacy</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Complete 30 MCQ Questions from BTCOC702 Question Bank
+    const mcqData = [
+      // ==================== CO-01 (10 Questions) ====================
+      {
+        id: 1,
+        co: "CO-01",
+        bl: "BL-1",
+        q: "1. Which of the following best defines cloud computing?",
+        options: [
+          "A) On-demand access to computing resources over the internet",
+          "B) Local data storage on personal devices",
+          "C) Offline access to network resources",
+          "D) Hardware-only infrastructure solutions"
+        ],
+        ans: 0,
+        hinglish: "Cloud computing ka matlab hi hai internet ke through jab chahiye tab (on-demand) servers, storage aur apps use karna bina khud ka physical hardware khareede!"
+      },
+      {
+        id: 2,
+        co: "CO-01",
+        bl: "BL-1",
+        q: "2. Which vision of cloud computing emphasizes scalability and pay-per-use?",
+        options: [
+          "A) Autonomous computing",
+          "B) Grid computing",
+          "C) Utility computing",
+          "D) Client-server architecture"
+        ],
+        ans: 2,
+        hinglish: "Jaise hum ghar mein bijli (electricity) ya paani ka bill jitna use karte hain utna bharte hain (Utility), waise hi Utility Computing mein cloud resources ko pay-per-use aur scalable tarike se diya jaata hai."
+      },
+      {
+        id: 3,
+        co: "CO-01",
+        bl: "BL-1",
+        q: "3. Which model provides consumers with access to infrastructure resources such as servers and storage?",
+        options: [
+          "A) SaaS",
+          "B) PaaS",
+          "C) IaaS",
+          "D) DaaS"
+        ],
+        ans: 2,
+        hinglish: "IaaS (Infrastructure as a Service) humein virtual servers, storage aur networking rent par deta hai (Example: AWS EC2)."
+      },
+      {
+        id: 4,
+        co: "CO-01",
+        bl: "BL-1",
+        q: "4. Which company was among the early adopters of cloud services through its AWS platform?",
+        options: [
+          "A) Microsoft",
+          "B) Amazon",
+          "C) Google",
+          "D) Oracle"
+        ],
+        ans: 1,
+        hinglish: "AWS ka full form hi Amazon Web Services hai! Amazon ne 2006 mein S3 aur EC2 launch karke modern cloud computing ki shuruat ki thi."
+      },
+      {
+        id: 5,
+        co: "CO-01",
+        bl: "BL-1",
+        q: "5. What is the main purpose of virtualization in cloud computing?",
+        options: [
+          "A) To provide redundancy in networking",
+          "B) To divide physical resources into multiple virtual units",
+          "C) To improve physical hardware performance",
+          "D) To eliminate software dependency"
+        ],
+        ans: 1,
+        hinglish: "Virtualization ka main kaam ek bade physical server ko chhote-chhote multiple Virtual Machines (VMs) mein divide karna hai taaki hardware ka पूरा use ho sake."
+      },
+      {
+        id: 6,
+        co: "CO-01",
+        bl: "BL-1",
+        q: "6. Which of the following virtualization platforms is developed by Microsoft?",
+        options: [
+          "A) VMware vSphere",
+          "B) Microsoft Hyper-V",
+          "C) Oracle VirtualBox",
+          "D) Citrix XenServer"
+        ],
+        ans: 1,
+        hinglish: "Microsoft ka apna native hypervisor platform 'Microsoft Hyper-V' hai jo Windows Server aur Windows Pro/Enterprise mein aata hai."
+      },
+      {
+        id: 7,
+        co: "CO-01",
+        bl: "BL-1",
+        q: "7. In the cloud computing reference model, which layer interacts directly with users?",
+        options: [
+          "A) Infrastructure Layer",
+          "B) Platform Layer",
+          "C) Application Layer",
+          "D) Virtualization Layer"
+        ],
+        ans: 2,
+        hinglish: "End-users (jaise hum Gmail ya Netflix use karte hain) hamesha sabse upar wali 'Application Layer' (SaaS) ke saath directly interact karte hain."
+      },
+      {
+        id: 8,
+        co: "CO-01",
+        bl: "BL-1",
+        q: "8. Which layer in virtualization is responsible for interacting directly with hardware resources?",
+        options: [
+          "A) Guest Operating System",
+          "B) Virtual Machine Monitor (Hypervisor)",
+          "C) Management Console",
+          "D) Cloud Application Layer"
+        ],
+        ans: 1,
+        hinglish: "Virtual Machine Monitor (VMM) yaani Hypervisor physical hardware (CPU/RAM) ko control karta hai aur Guest VMs ko resources allocate karta hai."
+      },
+      {
+        id: 9,
+        co: "CO-01",
+        bl: "BL-1",
+        q: "9. Para-virtualization differs from full virtualization because it:",
+        options: [
+          "A) Does not require guest OS modifications",
+          "B) Provides stronger isolation between VMs",
+          "C) Requires the guest OS to be modified to communicate with the hypervisor",
+          "D) Uses more hardware resources"
+        ],
+        ans: 2,
+        hinglish: "Full virtualization mein Guest OS ko pata nahi hota ki woh virtual hai, lekin Para-virtualization mein Guest OS ke kernel ko modify kiya jaata hai taaki woh 'Hypercalls' ke through seedha Hypervisor se fast baat kar sake."
+      },
+      {
+        id: 10,
+        co: "CO-01",
+        bl: "BL-1",
+        q: "10. VMware's ESXi is an example of which type of hypervisor?",
+        options: [
+          "A) Type 1 (Bare Metal) Hypervisor",
+          "B) Type 2 (Hosted) Hypervisor",
+          "C) Hybrid Hypervisor",
+          "D) Embedded Hypervisor"
+        ],
+        ans: 0,
+        hinglish: "VMware ESXi seedha physical server hardware ke upar install hota hai (bina kisi host OS ke), isliye isse Type 1 (Bare Metal) Hypervisor kehte hain."
+      },
+
+      // ==================== CO-02 (10 Questions) ====================
+      {
+        id: 11,
+        co: "CO-02",
+        bl: "BL-1",
+        q: "1. Which of the following layers belongs to the Cloud Computing Reference Model?",
+        options: [
+          "A) Physical, Virtual, Control, Orchestration, Service",
+          "B) Physical, Data, Transport, Application, Session",
+          "C) Application, Presentation, Network, Physical, Service",
+          "D) Hardware, Network, Application, Security, Protocol"
+        ],
+        ans: 0,
+        hinglish: "Cloud Computing Reference Model ki 5 layers hoti hain: Physical layer, Virtual layer, Control layer, Orchestration layer, aur Service layer (Option B aur C OSI networking model ke hain)."
+      },
+      {
+        id: 12,
+        co: "CO-02",
+        bl: "BL-1",
+        q: "2. In the NIST Cloud Computing Reference Architecture, which of the following is not one of the five major actors?",
+        options: [
+          "A) Cloud Consumer",
+          "B) Cloud Broker",
+          "C) Cloud Vendor",
+          "D) Cloud Auditor"
+        ],
+        ans: 2,
+        hinglish: "NIST architecture ke 5 official actors hain: Cloud Consumer, Cloud Provider, Cloud Broker, Cloud Auditor, aur Cloud Carrier. 'Cloud Vendor' naam ka official NIST actor nahi hota."
+      },
+      {
+        id: 13,
+        co: "CO-02",
+        bl: "BL-1",
+        q: "3. Which component in cloud architecture serves as the primary interface for end users to access cloud services?",
+        options: [
+          "A) Service Orchestration",
+          "B) Client Infrastructure",
+          "C) Virtualization Layer",
+          "D) Control Layer"
+        ],
+        ans: 1,
+        hinglish: "Client Infrastructure (Frontend - jaise web browser, mobile app, ya thin client) woh hissa hai jiske zariye user cloud services ko access karta hai."
+      },
+      {
+        id: 14,
+        co: "CO-02",
+        bl: "BL-1",
+        q: "4. Which service model gives users control over operating systems, storage, and deployed applications but not over the physical infrastructure?",
+        options: [
+          "A) IaaS",
+          "B) PaaS",
+          "C) SaaS",
+          "D) DaaS"
+        ],
+        ans: 0,
+        hinglish: "IaaS mein physical data center provider sambhalta hai, lekin kaunsa OS (Linux/Windows) dalna hai, storage aur apni apps kaise chalani hain uska control user ke paas hota hai."
+      },
+      {
+        id: 15,
+        co: "CO-02",
+        bl: "BL-1",
+        q: "5. In Platform as a Service (PaaS), the cloud provider mainly manages:",
+        options: [
+          "A) Operating systems and storage devices",
+          "B) The application logic and user interface",
+          "C) The development platform and runtime environment",
+          "D) Networking cables and routers only"
+        ],
+        ans: 2,
+        hinglish: "PaaS (jaise Google App Engine ya Heroku) mein provider poora development platform, OS, aur runtime environment manage karta hai; developer ko bas apna code likhna hota hai!"
+      },
+      {
+        id: 16,
+        co: "CO-02",
+        bl: "BL-1",
+        q: "6. Which of the following correctly describes Software as a Service (SaaS)?",
+        options: [
+          "A) Provides access to networking hardware",
+          "B) Allows users to develop and deploy their own applications",
+          "C) Offers ready-to-use software applications via the internet",
+          "D) Enables hardware-level infrastructure provisioning"
+        ],
+        ans: 2,
+        hinglish: "SaaS mein aapko ready-made software internet/browser par milta hai (jaise Gmail, Google Docs, Microsoft 365) jismein kuch install ya code nahi karna padta."
+      },
+      {
+        id: 17,
+        co: "CO-02",
+        bl: "BL-1",
+        q: "7. Cloud interoperability and standardization are crucial because they:",
+        options: [
+          "A) Increase vendor lock-in",
+          "B) Allow seamless communication between different cloud providers",
+          "C) Eliminate scalability options",
+          "D) Restrict application portability"
+        ],
+        ans: 1,
+        hinglish: "Interoperability aur standardization se alag-alag cloud providers (jaise AWS aur Azure) aapas mein aasani se connect ho sakte hain aur Vendor Lock-in khatam hota hai."
+      },
+      {
+        id: 18,
+        co: "CO-02",
+        bl: "BL-1",
+        q: "8. From an economic perspective, one of the major advantages of cloud computing is:",
+        options: [
+          "A) High Capital Expenditure (CapEx)",
+          "B) Pay-as-you-go pricing model reducing operational costs",
+          "C) Requirement of upfront infrastructure",
+          "D) Cost increases with less usage"
+        ],
+        ans: 1,
+        hinglish: "Cloud ka sabse bada economic fayda hai Pay-as-you-go model, jismein shuruat mein karodon ke servers nahi khareedne padte (Low CapEx) aur operational cost kam ho jaati hai."
+      },
+      {
+        id: 19,
+        co: "CO-02",
+        bl: "BL-1",
+        q: "9. What distinguishes a hybrid cloud from other types of clouds?",
+        options: [
+          "A) Combines public and private cloud models for flexibility",
+          "B) Restricted to government use only",
+          "C) Costs more but offers less scalability",
+          "D) Operates only on local servers"
+        ],
+        ans: 0,
+        hinglish: "Hybrid Cloud = Private Cloud (sensitive data ke liye) + Public Cloud (high scalability ke liye) ka combination hota hai."
+      },
+      {
+        id: 20,
+        co: "CO-02",
+        bl: "BL-1",
+        q: "10. Which of the following cloud types is shared among several organizations with a common concern?",
+        options: [
+          "A) Public Cloud",
+          "B) Private Cloud",
+          "C) Hybrid Cloud",
+          "D) Community Cloud"
+        ],
+        ans: 3,
+        hinglish: "Jab ek hi sector ki kai organizations (jaise saare Banks ya saare Hospitals) milkar ek common security/compliance goal ke liye cloud share karti hain, toh usse Community Cloud kehte hain."
+      },
+
+      // ==================== CO-03 (10 Questions) ====================
+      {
+        id: 21,
+        co: "CO-03",
+        bl: "BL-1",
+        q: "1. Which of the following best describes Storage as a Service (STaaS)?",
+        options: [
+          "A) A model where users manage physical storage devices remotely",
+          "B) A cloud model providing scalable storage resources over the internet",
+          "C) An on-premises system for enterprise data management",
+          "D) Software that enhances local storage performance"
+        ],
+        ans: 1,
+        hinglish: "STaaS (jaise Amazon S3 ya Google Drive) internet ke upar on-demand aur scalable data storage rent par deta hai."
+      },
+      {
+        id: 22,
+        co: "CO-03",
+        bl: "BL-1",
+        q: "2. Database as a Service (DBaaS) primarily offers:",
+        options: [
+          "A) Physical database hosting and localized query management",
+          "B) Cloud-based database management without manual maintenance",
+          "C) Offline data replication and backup solutions",
+          "D) Hardware-only database solutions for on-premises users"
+        ],
+        ans: 1,
+        hinglish: "DBaaS (jaise AWS RDS ya MongoDB Atlas) mein cloud provider khud database ka setup, patching aur backup sambhalta hai bina manual maintenance ke."
+      },
+      {
+        id: 23,
+        co: "CO-03",
+        bl: "BL-2",
+        q: "3. Which enterprise cloud service model focuses on automating and managing business workflows through cloud platforms?",
+        options: [
+          "A) Storage as a Service",
+          "B) Process as a Service",
+          "C) Desktop as a Service",
+          "D) Testing as a Service"
+        ],
+        ans: 1,
+        hinglish: "Process as a Service (PraaS / BPaaS) business workflows aur multi-step enterprise processes ko cloud par automate aur manage karne ke kaam aata hai."
+      },
+      {
+        id: 24,
+        co: "CO-03",
+        bl: "BL-4",
+        q: "4. Fault tolerance in cloud computing focuses on:",
+        options: [
+          "A) Minimizing downtime through redundancy and failover mechanisms",
+          "B) Reducing energy consumption through optimization",
+          "C) Maximizing processing power for fewer physical servers",
+          "D) Preventing any data replication"
+        ],
+        ans: 0,
+        hinglish: "Fault Tolerance ka matlab hai ki agar ek server fail bhi ho jaye, toh backup server (Redundancy & Failover) turant kaam sambhal le taaki zero downtime rahe."
+      },
+      {
+        id: 25,
+        co: "CO-03",
+        bl: "BL-3",
+        q: "5. Which best defines horizontal scaling in cloud environments?",
+        options: [
+          "A) Replacing virtual machines with physical servers",
+          "B) Adding new instances to distribute load across multiple machines",
+          "C) Increasing CPU power and RAM in a single machine",
+          "D) Reducing load by removing user sessions"
+        ],
+        ans: 1,
+        hinglish: "Horizontal Scaling (Scale Out) ka matlab hai ek hi machine ki RAM badhane ki jagah aur naye server instances (VMs) add karke load baant dena."
+      },
+      {
+        id: 26,
+        co: "CO-03",
+        bl: "BL-1",
+        q: "6. Which cloud characteristic enables automatic resource adjustment based on traffic or workload?",
+        options: [
+          "A) Multi-tenancy",
+          "B) Elasticity",
+          "C) Virtualization",
+          "D) Redundancy"
+        ],
+        ans: 1,
+        hinglish: "Rubber band ki tarah traffic badhne par resources ka automatically badhna (Scale Out) aur traffic kam hone par wapas ghatna (Scale In) 'Elasticity' kehlata hai."
+      },
+      {
+        id: 27,
+        co: "CO-03",
+        bl: "BL-1",
+        q: "7. Capacity planning in cloud infrastructure ensures:",
+        options: [
+          "A) Predicting and provisioning resources to handle variable demand",
+          "B) Preventing users from accessing services during maintenance",
+          "C) Fixing static resource allocations for stability",
+          "D) Reducing elasticity of deployed resources"
+        ],
+        ans: 0,
+        hinglish: "Capacity planning ka kaam future traffic demand ko predict karna aur sahi maatra mein cloud resources arrange (provision) karna hai."
+      },
+      {
+        id: 28,
+        co: "CO-03",
+        bl: "BL-4",
+        q: "8. Integration as a Service (IaaS / iPaaS) differs from Infrastructure as a Service (IaaS) because it:",
+        options: [
+          "A) Focuses on combining multiple cloud applications and systems",
+          "B) Provides virtual machines for application hosting",
+          "C) Manages operating systems and middleware",
+          "D) Supplies cloud-based networking tools only"
+        ],
+        ans: 0,
+        hinglish: "Integration as a Service (iPaaS) alag-alag cloud apps aur on-premise systems ke beech data aur APIs ko connect (integrate) karne ka kaam karta hai."
+      },
+      {
+        id: 29,
+        co: "CO-03",
+        bl: "BL-3",
+        q: "9. Testing as a Service (TaaS) helps enterprises by:",
+        options: [
+          "A) Running tests across platforms using cloud-based environments",
+          "B) Replacing the need for software updates",
+          "C) Serving as a data storage manager for backup automation",
+          "D) Eliminating the need for quality assurance in software"
+        ],
+        ans: 0,
+        hinglish: "TaaS (Testing as a Service) developers ko cloud par alag-alag browsers, OS aur devices ke virtual environments deta hai jahan woh automated software testing kar sakte hain."
+      },
+      {
+        id: 30,
+        co: "CO-03",
+        bl: "BL-1",
+        q: "10. Information as a Service provides organizations with:",
+        options: [
+          "A) Application deployment tools for developers",
+          "B) On-demand access to real-time and processed data",
+          "C) Physical backup and database restoration services",
+          "D) File compression tools for storage optimization"
+        ],
+        ans: 1,
+        hinglish: "Information as a Service (INaaS) companies ko standardized APIs ke through real-time, verified aur processed data (jaise stock market feed, weather data, credit score) on-demand deta hai."
+      }
+    ];
+
+    let score = 0;
+    let attempted = 0;
+    let currentFilter = 'ALL';
+    const userAnswers = {};
+
+    function renderQuestions() {
+      const container = document.getElementById('questions-container');
+      container.innerHTML = '';
+
+      const filtered = currentFilter === 'ALL'
+        ? mcqData
+        : mcqData.filter(item => item.co === currentFilter);
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'q-card';
+
+        const answeredChoice = userAnswers[item.id];
+        const isAnswered = answeredChoice !== undefined;
+
+        let optionsHTML = '';
+        item.options.forEach((opt, idx) => {
+          let btnClass = 'opt-btn';
+          if (isAnswered) {
+            if (idx === item.ans) btnClass += ' correct';
+            else if (idx === answeredChoice) btnClass += ' wrong';
+          }
+          optionsHTML += `
+            <button class="${btnClass}" 
+                    onclick="selectOption(${item.id}, ${idx})" 
+                    ${isAnswered ? 'disabled' : ''}>
+              ${opt}
+            </button>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="q-header">
+            <span class="co-tag">${item.co} (1 Mark)</span>
+            <span class="bl-tag">Bloom's Level: ${item.bl}</span>
+          </div>
+          <div class="q-title">${item.q}</div>
+          <div class="options-grid">${optionsHTML}</div>
+          <div class="explanation-box ${isAnswered ? 'show' : ''}" id="exp-${item.id}">
+            <strong>✅ Correct Answer:</strong> ${item.options[item.ans]}<br/>
+            <span style="color:#92400e;"><strong>💡 Hinglish Explanation:</strong> ${item.hinglish}</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function selectOption(qId, selectedIdx) {
+      if (userAnswers[qId] !== undefined) return;
+      userAnswers[qId] = selectedIdx;
+
+      const questionObj = mcqData.find(q => q.id === qId);
+      attempted++;
+      if (selectedIdx === questionObj.ans) {
+        score++;
+      }
+
+      document.getElementById('score-val').innerText = score;
+      document.getElementById('attempted-val').innerText = attempted;
+      renderQuestions();
+    }
+
+    function filterMCQs(co, btnElement) {
+      currentFilter = co;
+      document.querySelectorAll('#mcq-section .filter-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+      renderQuestions();
+    }
+
+    function resetQuiz() {
+      score = 0;
+      attempted = 0;
+      for (let key in userAnswers) delete userAnswers[key];
+      document.getElementById('score-val').innerText = '0';
+      document.getElementById('attempted-val').innerText = '0';
+      renderQuestions();
+    }
+
+    function switchMainTab(tab) {
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(b => b.classList.remove('active'));
+
+      if (tab === 'mcq') {
+        buttons[0].classList.add('active');
+        document.getElementById('mcq-section').classList.remove('hidden');
+        document.getElementById('desc-section').classList.add('hidden');
+      } else {
+        buttons[1].classList.add('active');
+        document.getElementById('mcq-section').classList.add('hidden');
+        document.getElementById('desc-section').classList.remove('hidden');
+      }
+    }
+
+    // Initial load
+    renderQuestions();
+  </script>
+</body>
+</html>
